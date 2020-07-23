@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>38 to 67 || Js Assignment</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            overflow-x: hidden;
+            text-align: center;
+        }
+        .container{
+            width: 100%;
+            background-color: #fcfcfc;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .row{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 15px auto;
+            padding: 25px 30px;
+        }
+        .card{
+            width: 23%;
+            height: 350px;
+            text-align: center;
+            border: 2px solid rgba(0, 0, 0, 0.26);
+            box-shadow: -5px 10px 15px  rgba(0, 0, 0, 0.371);
+          
+        }
+        .card img{
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+        }
+        .card button{
+            display: block;
+            width: 100%;
+            height: 50px;
+            background-color: mediumturquoise;
+            color: #fff;
+            font-size: 22px;
+            text-decoration: none;
+            font-weight: 700;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+        #myTable,#myTable1{
+            margin: 100px auto;
+            width: 50%;            
+        }
+        #myTable td,th{
+            border: 1px solid #000;
+            padding: 5px;
+        }
+        input[type="button"]{
+            width: 100%;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        .img_box{
+            margin: 50px auto;
+            width: 60%;
+            position: relative;
+        }
+        .img_box h1{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: #fff;
+            font-size: 45px;
+            letter-spacing: 15px;
+            text-shadow: 15px 15px 25px #000;
+          
+        }
+        .img{
+            border: 2px solid red;
+            width: 100%;
+            object-fit: contain;
+            z-index: 111;
+        }
+        .button{
+            padding: 10px 35px;
+            background-color: cornflowerblue;
+            border: none;
+            outline: none;
+            font-size: 22px;
+            color: #fff;
+            cursor: pointer;
+        }
+        form{
+            margin: 50px auto;
+            width: 70%;
+            background-color: cornflowerblue;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.363);
+        }
+        form h1{
+            color: #fff;
+            font-weight: 900;
+            font-size: 40px;
+            margin: 15px 0;
+        }
+        form input[type='button']{
+            margin-top: 15px;
+            width: 200px;
+            height: 45px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 25px;
+            color: #fff;
+            font-weight: 700;
+            background-color: #000;
+        }
+        .form_group{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 30px;
+        }
+        .form_group label{
+            width: 30%;
+            color: #fff;
+            font-weight: 600;
+            font-size: 22px;
+            text-align: justify;
+        }
+        .form_group input{
+            width: 70%;
+            padding: 15px 25px;
+            border: rgb(0, 0, 0) .5px solid;
+            border-radius: 25px;
+            outline: none;
+            font-size: 16px;
+        }
+        #form_data{
+            width: 100%;
+            height: 50%;
+            border-radius: 10px;
+            background: rgb(20, 197, 20);
+            color: #000;
+            font-size: 17px;
+            font-weight: 700;
+            padding: 10px 50px;
+            text-align: justify;
+        }
+        p{
+            text-align: justify;
+        }
+        #more,#btn1{
+            display: none;
+        }
+       .gallery{
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: space-evenly;
+           align-items: center;
+           padding: 50px 20px;
+           background-color: #f3f3f3;
+       }
+       .gallery img{
+           width: 250px;
+           height: 200px;
+           object-fit: cover;
+           margin: 10px 5px;
+           border: 1px solid #000;
+           cursor: pointer;
+           transition: transform .3s;
+       }
+       .gallery img:hover{
+        transform: scale(1.2)
+       }
+       #model_gallery{
+           width: 100%;
+           background-color: #000;
+            display: none;
+            position: relative;
+            padding:  100px;
+       }
+       #model_gallery img{
+           width: 100%;
+           height: 500px;
+           object-fit: cover;
+           object-position: center;
+           z-index: -1;
+           box-shadow: -10px -5px 50px rgba(255, 255, 255, 0.582);
+       }
+       #model_gallery .prevbtn{
+        position: absolute;
+        z-index: 111;
+        top: 50%;
+        left: 5%;
+        transform: translate(-5%,-50%);
+        background-color: rgb(175, 243, 65);
+        border: none;
+        outline: none;
+        width: 100px;
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+       }
+       #model_gallery .nextbtn{
+        position: absolute;
+        z-index: 111;
+        top: 50%;
+        right: 5%;
+        transform: translate(-5%,-50%);
+        background-color: rgb(175, 243, 65);
+        border: none;
+        outline: none;
+        width: 100px;
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+       }
+       #close_btn{
+           width: 25px;
+           height: 25px;
+           position: absolute;
+           top: 5%;
+           right: 5%;
+           transform: translate(-5%,-5%);
+           cursor: pointer;
+       }
+       #close_btn i{
+           width: 100%;
+           height: 3px;
+           background-color: chartreuse;
+           border-radius: 5px;
+           position: absolute;
+           top: 0;
+           left: 0;
+       }
+       #close_btn i:nth-child(1){
+            margin-top: 10px;
+           transform: rotate(45deg);
+       }
+       #close_btn i:nth-child(2){
+            margin-top: 10px;
+           transform: rotate(-45deg);
+       }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <img src="images/product1.jpg" alt="">
+                <button onclick="alerts()">Add To Cart</button>
+            </div>
+            <div class="card">
+                <img src="images/product2.jpg" alt="">
+                <button onclick="alerts()">Add To Cart</button>
+            </div>
+            <div class="card">
+                <img src="images/product3.jpg" alt="">
+                <button onclick="alerts()">Add To Cart</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <table id="myTable">
+        <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Class</th>
+        </tr>
+       
+        <tr>
+          <td>Jill</td>
+          <td>Smith</td>
+          <td>50</td>
+          <td><input type="button" value="Delete"
+            onclick="delete_row()"></td>
+        </tr>
+        
+        <tr>
+          <td>Eve</td>
+          <td>Jackson</td>
+          <td>94</td>
+          <td><input type="button" value="Delete"
+            onclick="delete_row()"></td>
+        </tr>
+       
+        <tr>
+          <td>John</td>
+          <td>Doe</td>
+          <td>80</td>
+          <td><input type="button" value="Delete"
+            onclick="delete_row()"></td>
+        </tr>
+    </table>
+
+      <div class="container">
+          <div class="row">
+              <div class="img_box">
+                  <h1>Hover Me</h1>
+                <img class="img"  onmouseover="rollover(this)" 
+                onmouseout="mouseaway(this)" src="images/bg.jpg" alt="">
+            </div>
+            
+          </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+            
+            <button class="button" type="button" onClick="add()">Increase Value</button>
+            <p>Clicks: <a id="clicks">0</a></p>
+            <button class="button" type="button" onClick="rem()">Decrease value</button>
+        </div>
+      </div>
+
+      <div class="container">
+          <div class="row">
+            <p id="form_data">
+                Form Data Will Be Show Here!
+                <br>
+            </p>
+          </div>
+      </div>
+
+      <div class="container">
+          <div class="row">
+              <form action="" >
+                  <h1>Creat an account</h1>
+                  <div class="form_group">
+                    <label for="">Name:</label>
+                    <input id="name" type="text" required placeholder="Enter your name:">
+                </div>
+                <div class="form_group">
+                    <label for="">Email:</label>
+                    <input id="email" type="Email" required placeholder="Enter your Email:">
+                </div>
+                <div class="form_group">
+                    <label for="">Phone:</label>
+                    <input id="num" type="number" required placeholder="Enter your number:">
+                </div>
+                <div class="form_group">
+                    <label for="">password:</label>
+                    <input id="pass" type="text" required placeholder="Enter your password:">
+                </div>
+                  
+                  <input type="button" onclick="submits()"  value="submit">
+              </form>
+          </div>
+      </div>
+    
+      <div class="container">
+        <h1>Hello World!</h1>
+          <div class="row">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Ut culpa obcaecati odio dolore aut perspiciatis, porro quae
+                officia rem enim animi recusandae corporis. Eligendi accusamus
+                nobis omnis necessitatibus quos aperiam? Necessitatibus soluta
+                iure pariatur doloribus corporis unde error ex illo rem numquam.
+                Corrupti natus molestiae, quasi aut culpa, perspiciatis repudiandae
+                , similique alias maxime ipsam delectus architecto. In voluptatem
+                expedita quam magni quod molestias, esse odit beatae laborum unde
+                eveniet quibusdam illum deleniti nulla inventore neque quaerat ullam
+                aliquid fugiat cum, est velit! Laudantium rerum explicabo distinctio
+                , non obcaecati error impedit modi molestiae ipsum minima cum, 
+                incidunt accusamus, hic aliquid illo quisquam totam suscipit nisi?
+                Quam odio excepturi dignissimos repellat optio numquam possimus qui,
+                impedit vero quod nemo quis nostrum ipsum, quaerat temporibus nisi
+                ipsa tenetur nihil quos. Autem ab mollitia ipsa, earum cum fuga
+                beatae cumque modi debitis. Esse nulla eius alias, sit vero porro.
+                Quod rerum cum adipisci natus expedita quas, corporis incidunt magni
+                labore possimus odio exercitationem obcaecati sed reprehenderit ratione
+                minima quam saepe veritatis voluptates alias vitae doloribus optio. 
+                Enim debitis illum tenetur ut delectus ipsa culpa tempore deserunt molestias
+                cupiditate nam fugit quam autem fuga expedita provident nihil tempora, numquam
+                molestiae eos? Et, tempore quibusdam. Quasi consequuntur aliquid, similique vero
+                maiores architecto facilis quaerat dolore eligendi autem officiis neque enim
+                quibusdam at dolor numquam nam laudantium velit! Consectetur autem eveniet culpa
+                officia, rem, ex, facilis tempora voluptatum veniam laboriosam neque? Voluptatum
+                minima, necessitatibus harum facilis, autem, ea aperiam illo ut accusantium
+                uaerat ratione consequuntur sed est magnam qui nostrum eos placeat ipsum
+              </p>
+              <p id="more">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Ut culpa obcaecati odio dolore aut perspiciatis, porro quae
+                officia rem enim animi recusandae corporis. Eligendi accusamus
+                nobis omnis necessitatibus quos aperiam? Necessitatibus soluta
+                iure pariatur doloribus corporis unde error ex illo rem numquam.
+                Corrupti natus molestiae, quasi aut culpa, perspiciatis repudiandae
+                , similique alias maxime ipsam delectus architecto. In voluptatem
+                expedita quam magni quod molestias, esse odit beatae laborum unde
+                eveniet quibusdam illum deleniti nulla inventore neque quaerat ullam
+                aliquid fugiat cum, est velit! Laudantium rerum explicabo distinctio
+                , non obcaecati error impedit modi molestiae ipsum minima cum, 
+                incidunt accusamus, hic aliquid illo quisquam totam suscipit nisi?
+                Quam odio excepturi dignissimos repellat optio numquam possimus qui,
+                impedit vero quod nemo quis nostrum ipsum, quaerat temporibus nisi
+                ipsa tenetur nihil quos. Autem ab mollitia ipsa, earum cum fuga
+                beatae cumque modi debitis. Esse nulla eius alias, sit vero porro.
+                Quod rerum cum adipisci natus expedita quas, corporis incidunt magni
+                labore possimus odio exercitationem obcaecati sed reprehenderit ratione
+                minima quam saepe veritatis voluptates alias vitae doloribus optio. 
+                Enim debitis illum tenetur ut delectus ipsa culpa tempore deserunt molestias
+                cupiditate nam fugit quam autem fuga expedita provident nihil tempora, numquam
+                molestiae eos? Et, tempore quibusdam. Quasi consequuntur aliquid, similique vero
+                maiores architecto facilis quaerat dolore eligendi autem officiis neque enim
+                quibusdam at dolor numquam nam laudantium velit! Consectetur autem eveniet culpa
+                officia, rem, ex, facilis tempora voluptatum veniam laboriosam neque? Voluptatum
+                minima, necessitatibus harum facilis, autem, ea aperiam illo ut accusantium
+                uaerat ratione consequuntur sed est magnam qui nostrum eos placeat ipsum
+              </p>   
+          </div>
+          <button id="btn" class="button" onclick="readmore()">Read More</button>
+          <button id="btn1" class="button" onclick="readless()">Read Less</button>
+          <br>
+          <br>
+          <br>
+      </div> 
+
+      <div class="container">
+        <div class="row">
+            <form action="">
+                <h1>Enter Student details</h1>
+                <div class="form_group">
+                  <label for="">Name:</label>
+                  <input id="std_name" type="text"  placeholder="Enter your name:">
+              </div>
+              <div class="form_group">
+                  <label for="">Email:</label>
+                  <input id="std_email" type="Email"  placeholder="Enter your Email:">
+              </div>
+              <div class="form_group">
+                  <label for="">Phone:</label>
+                  <input id="std_num" type="number"  placeholder="Enter your number:">
+              </div>
+                <input type="button" onclick="details()" value="Add">
+            </form>
+        </div>
+      </div>
+
+      <div class="container">     
+          <div class="row">
+            <table id="myTable1" border="1px">
+                <tr>
+                    <th colspan="4"><h1>Data Of students Wil be store here</h1></th>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </table>
+          </div>
+      </div>
+
+      <div class="container">
+          <div class="row">
+              <div class="gallery" id="gallery">
+                  <img onclick="open_img_box()" src="images/10.jpg" alt="">
+                  <img onclick="open_img_box()" src="images/8.jpg" alt="">
+                  <img onclick="open_img_box()" src="images/6.jpg" alt="">
+                  <img onclick="open_img_box()" src="images/11.jpg" alt="">
+                  <img onclick="open_img_box()" src="images/1.jpg" alt="">
+                  <img onclick="open_img_box()" src="images/2.jpg" alt="">
+                  <img onclick="open_img_box()" src="images/4.png" alt="">
+                  <img onclick="open_img_box()" src="images/6.jpg" alt="">
+              </div>
+          </div>
+      </div>
+
+      <div class="container">
+          <div id="model_gallery">
+            <img id="model_img" src="images/10.jpg" alt="">
+            <button class="prevbtn" onclick="previous_img()">Previous</button>
+            <button class="nextbtn" onclick="next_img()">Next</button>
+            <div id="close_btn" onclick="close_img_model()">
+                <i></i>
+                <i></i>
+            </div>
+          </div>
+      </div>
+
+      <div class="container">
+          <div class="row">
+              <p id="para">
+                Lorem ipsum dolor sit amet consectetur, 
+                adipisicing elit. Tempora corporis quod 
+                at quo eaque eveniet voluptatem nam aperiam
+                exercitationem soluta laborum, provident sed
+                otam amet asperiores maiores sit autem magnam
+                pariatur optio a necessitatibus atque. Deleniti ea,
+                vero quo repellat, delectus obcaecati, sed aperiam nihil omnis
+                dignissimos harum consequuntur minima doloremque tenetur quos nobis
+                voluptatem libero mollitia quam quasi illo doloribus! Itaque soluta delectus
+                ullam ut quos laudantium minus at harum, laboriosam corrupti, perspiciatis
+                provident laborum? Minima ex, quibusdam eaque eos odit doloremque beatae
+                tempore veritatis ullam iste aliquam impedit architecto voluptatum aspernatur
+                laborum consequuntur, reprehenderit expedita repudiandae. Quas, architecto.
+                <br>
+                <br>
+            </p>
+           
+              <button class="button" onclick="incr_f_size()">Zoom In</button>
+              <button class="button" onclick="dcr_f_size()">Zomm Out</button>
+          </div>
+      </div>
+
+      <div>
+          <br>
+        <h1> DOM </h1>
+        <br>
+        <div id="form-content" class="content">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" />
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" />
+        <label for="email">Email</label>
+        <input type="text" id="emaill" />
+        </div>
+        <div id="main-content" class="content">
+        <p class=render> First Name : Alex</p>
+        <p class="render" id="lastName">Last Name: Bank</p>
+        <p class="render"> Email : alexbank@example.com</p>
+        <p class="render"> Country : Pakistan </p>
+        <p class="render"> contact : +92 300 1234567</p>
+        </div>
+        </div>
+        <br><br><br><br><br>
+      
+    <script src="app.js"></script>
+</body>
+</html>
